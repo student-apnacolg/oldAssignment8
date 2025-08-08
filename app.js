@@ -68,7 +68,7 @@ app.post("/start-edit", (req, res) => {
 })
 
 app.post('/edit', async (req, res) => {
-  const updatedTask = req.body.updatedIndex?.trim();
+  const updatedTask = req.body.text?.trim();
   const updatedPriority = req.body.updatedPriority;
   if (updatedTask && updatedPriority && editIndex) {
     await Task.updateOne({_id: editIndex}, {
