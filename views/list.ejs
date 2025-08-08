@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <title>Todo List</title>
+</head>
+
+<body>
+  <h1>My Todo List</h1>
+  <main>
+    <form action="/" method="POST" class="addForm">
+      <input type="text" name="task" placeholder="Create a Task" required>
+      <select name="priority" class="prioritySelect" required>
+        <option value="">Select Priority</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+      <button type="submit">Add</button>
+    </form>
+
+    <% if(error) { %>
+      <p class="error">
+        <%= error %>
+      </p>
+      <% } %>
+
+        <ul class="taskList">
+          <% tasks.forEach((task, index)=> {%>
+            <li>
+              <% if(editIndex===String(task._id)) { %>
+                <form action="/edit" method="POST" class="editForm">
+                  <input type="hidden" name="id" value="<%= task._id %>">
+                  <input type="text" name="text" value="<%= task.text %>" required>
+                  <select name="updatedPriority" class="prioritySelect">
+                    <option value="High" <%=task.priority==="High" ? "selected" : "" %>>High</option>
+                    <option value="Medium" <%=task.priority==="Medium" ? "selected" : "" %>>Medium</option>
+                    <option value="Low" <%=task.priority==="Low" ? "selected" : "" %>>Low</option>
+                  </select>
+                  <button type="submit">Save</button>
+                </form>
+                <% } else { %>
+                  <strong>
+                    <%= task.text %>
+                  </strong> -
+                  <em>
+                    <%= task.priority %>
+                  </em>
+                  <div class="formContainer">
+                    <form action="/start-edit" method="POST" class="startEditForm">
+                      <input type="hidden" name="editIndex" value="<%= task._id %>">
+                      <button type="submit">Edit</button>
+                    </form>
+
+                    <form action="/delete" method="POST" class="deleteForm">
+                      <input type="hidden" name="deleteIndex" value="<%= task._id %>">
+                      <button type="submit">X</button>
+                    </form>
+                  </div>
+                  <% } %>
+            </li>
+            <% }) %>
+        </ul>
+
+  </main>
+</body>
+
+</html>
