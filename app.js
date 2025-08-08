@@ -1,9 +1,11 @@
 const mongoose = require('mongoose')
 const express = require('express')
+const dotenv = require('dotenv')
 const app = express()
+dotenv.config()
 const PORT = 3233
 
-mongoose.connect("mongodb+srv://nikhil1111sharma:ejsTodoClusterPass@ejstodocluster.8ibu20i.mongodb.net/todoDB?retryWrites=true&w=majority&appName=ejsTodoClustertod")
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("Connected to MongoDB"))
 .catch(err => console.log("MongoDB connection error"))
 
