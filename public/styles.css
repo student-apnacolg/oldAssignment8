@@ -15,7 +15,7 @@ h1 {
 }
 
 main {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -28,6 +28,12 @@ main {
   display: flex;
   padding: 2rem 0;
   justify-content: center;
+}
+
+@media (max-width: 450px) {
+  .addForm {
+    flex-direction: column;
+  }
 }
 
 .addForm input {
@@ -60,7 +66,7 @@ main {
 }
 
 .taskList {
-  width: 450px;
+  width: 100%;
   padding: 1rem;
   list-style: none;
   border-radius: .5rem;
